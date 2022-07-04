@@ -3,12 +3,15 @@
 #include <random>
 #include <cmath>
 #include <vector>
+#include <chrono>
 
 #include "point.hpp"
 #include "queue.hpp"
 
 #define ui64 uint64_t
-// #define vec(dim) std::vector<Point<dim>>
+
+typedef std::chrono::high_resolution_clock myclock;
+myclock::time_point beginning = myclock::now();
 
 // Calcula el número necesario de bits para representar x
 int bit_length(int x)
@@ -72,7 +75,9 @@ int compare(Queue<d> Q1, Queue<1> Q2)
 int main(int argc, char *argv[])
 {
 	// Generar un vector con 5000 puntos 10-D
-	std::default_random_engine generator;
+	myclock::duration d = myclock::now() - beginning;
+  	unsigned seed = d.count();
+	std::default_random_engine generator(seed);
 	std::uniform_int_distribution<int> dis(0, 7);
 	std::vector<Point<10> > mydata;
 	int number[10];
