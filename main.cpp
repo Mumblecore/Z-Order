@@ -98,12 +98,13 @@ int main(int argc, char *argv[])
 		elems[i] = dis2(generator);
 
 	// Hallar los k más cercanos en ambas dimensiones
+	int promedio = 0;
 	for (int i = 0; i < 10; i++)
 	{
 		std::cout << "Punto #" << elems[i] << ": ";
 		std::cout << mydata[elems[i]] << "->" << z_data[elems[i]] << std::endl;
-		Queue<10> 	results10d(atoi(argv[1]));
-		Queue<1>	results1d(atoi(argv[1]));
+		Queue<10> results10d(atoi(argv[1]));
+		Queue<1>  results1d(atoi(argv[1]));
 		knn<10>(mydata, results10d, elems[i]);
 		knn<1>(z_data, results1d, elems[i]);
 
@@ -116,6 +117,11 @@ int main(int argc, char *argv[])
 		// 	std::cout << z_order<10>(results10d.p_que[j]) << "\t";
 		// 	std::cout << results1d.p_que[j][0] << std::endl;
 		// }
-		std::cout << "Similitud: " << compare<10>(results10d,results1d) << "%\n";
+		int comp = compare<10>(results10d,results1d);
+		std::cout << "Similitud: " << comp << "%\n";
+		promedio += comp;
 	}
+
+	// Imprimir promedio
+	std::cout << "Promedio: " << promedio/10 << std::endl;
 }

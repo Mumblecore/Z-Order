@@ -55,7 +55,6 @@ void Queue<dim>::insert(Point<dim> P, double dist)
 		p_que.push_back(P);
 		d_que.push_back(dist);
 	}
-
 }
 
 #endif
